@@ -1,0 +1,1 @@
+worker: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/heroku-kotlin-worker-1.0-SNAPSHOT.jar

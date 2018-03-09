@@ -1,0 +1,49 @@
+buildscript {
+    ext.kotlin_version = '1.2.30'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+group 'io.bitbucket.naetmul.herokukotlinworker'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+
+// https://medium.com/@preslavrachev/kotlin-basics-create-executable-kotlin-jars-using-gradle-d17e9a8384b9
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'io.bitbucket.naetmul.herokukotlinworker.HerokuKotlinWorkerKt'
+        )
+    }
+
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
+task stage(dependsOn: ['clean', 'build'])
+build.mustRunAfter clean

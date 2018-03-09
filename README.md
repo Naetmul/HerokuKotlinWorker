@@ -9,3 +9,6 @@ Built with Gradle build automation system.
 - `build.gradle` (Kotlin stdlib will be included in the built `jar` file.)
 - `Procfile` (The worker dyno will execute the created `jar` file.)
 - `src/main/kotlin/io/bitbucket/naetmul/herokukotlinworker/HerokuKotlinWorker.kt` (A file where `fun main()` exists.)
+
+### What This App Does ###
+- Just an infinite logging
